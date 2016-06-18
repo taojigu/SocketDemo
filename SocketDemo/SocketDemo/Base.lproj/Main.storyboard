@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Send SocketVC-->
@@ -49,6 +50,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHk-ta-bEp">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="发送Socket"/>
+                                <connections>
+                                    <action selector="sendButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z4O-09-HTq"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="192.1.1.1:8080" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUN-dO-Az0">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -56,24 +60,88 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发送结果" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cim-Sh-e4u">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发送结果" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cim-Sh-e4u">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45984586028634589" green="0.44904537406004608" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="3se-nc-gi5"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="3se-nc-gi5"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="3se-nc-gi5"/>
+                                    </mask>
+                                </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wac-NH-3eh">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="1mr-wq-TH7"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="Xor-MU-COf"/>
+                                </constraints>
+                                <state key="normal" title="断开"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1mr-wq-TH7"/>
+                                        <exclude reference="Xor-MU-COf"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="1mr-wq-TH7"/>
+                                        <include reference="Xor-MU-COf"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="disconnectButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zlg-7O-5aR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dW-6B-meu">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="y93-IW-GMR"/>
+                                </constraints>
+                                <state key="normal" title="连接"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="y93-IW-GMR"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="y93-IW-GMR"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="connectButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BxB-Vz-QNN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YHk-ta-bEp" firstAttribute="top" secondItem="XUN-dO-Az0" secondAttribute="bottom" constant="24" id="1kb-W9-bxX"/>
+                            <constraint firstItem="cim-Sh-e4u" firstAttribute="leading" secondItem="9dW-6B-meu" secondAttribute="trailing" constant="10" id="3bD-Vw-abb"/>
+                            <constraint firstItem="9dW-6B-meu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="3wn-EN-Se0"/>
                             <constraint firstItem="a3Q-uk-SBU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="25" id="5GJ-eX-EFK"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9dW-6B-meu" secondAttribute="bottom" constant="223" id="9V9-S4-joQ"/>
+                            <constraint firstItem="9dW-6B-meu" firstAttribute="centerY" secondItem="Wac-NH-3eh" secondAttribute="centerY" id="Rgu-Yq-3ra"/>
                             <constraint firstItem="XUN-dO-Az0" firstAttribute="top" secondItem="oI8-y4-uOV" secondAttribute="bottom" constant="47" id="SVj-tg-Tbo"/>
                             <constraint firstItem="oI8-y4-uOV" firstAttribute="top" secondItem="a3Q-uk-SBU" secondAttribute="bottom" constant="31" id="UZq-vF-h1C"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Wac-NH-3eh" secondAttribute="trailing" constant="37" id="VE1-fR-d2I"/>
                             <constraint firstItem="cim-Sh-e4u" firstAttribute="centerX" secondItem="YHk-ta-bEp" secondAttribute="centerX" id="XwO-ic-V8x"/>
                             <constraint firstItem="cim-Sh-e4u" firstAttribute="top" secondItem="YHk-ta-bEp" secondAttribute="bottom" constant="13" id="aFK-8B-DZg"/>
                             <constraint firstItem="a3Q-uk-SBU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="f0K-Vz-Vsj"/>
                             <constraint firstItem="oI8-y4-uOV" firstAttribute="centerX" secondItem="a3Q-uk-SBU" secondAttribute="centerX" id="gUD-u5-imj"/>
                             <constraint firstItem="YHk-ta-bEp" firstAttribute="centerX" secondItem="XUN-dO-Az0" secondAttribute="centerX" id="gXL-OG-6zW"/>
+                            <constraint firstItem="9dW-6B-meu" firstAttribute="top" secondItem="cim-Sh-e4u" secondAttribute="bottom" constant="35" id="hLs-lS-NxY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cim-Sh-e4u" secondAttribute="trailing" constant="145" id="yLr-EP-hjQ"/>
                             <constraint firstItem="XUN-dO-Az0" firstAttribute="centerX" secondItem="oI8-y4-uOV" secondAttribute="centerX" id="zbr-9H-Rbe"/>
                         </constraints>
                         <variation key="default">
@@ -83,6 +151,8 @@
                                 <exclude reference="YHk-ta-bEp"/>
                                 <exclude reference="XUN-dO-Az0"/>
                                 <exclude reference="cim-Sh-e4u"/>
+                                <exclude reference="Wac-NH-3eh"/>
+                                <exclude reference="9dW-6B-meu"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="5GJ-eX-EFK"/>
@@ -93,8 +163,15 @@
                                 <exclude reference="zbr-9H-Rbe"/>
                                 <exclude reference="1kb-W9-bxX"/>
                                 <exclude reference="gXL-OG-6zW"/>
+                                <exclude reference="3bD-Vw-abb"/>
                                 <exclude reference="XwO-ic-V8x"/>
                                 <exclude reference="aFK-8B-DZg"/>
+                                <exclude reference="yLr-EP-hjQ"/>
+                                <exclude reference="3wn-EN-Se0"/>
+                                <exclude reference="Rgu-Yq-3ra"/>
+                                <exclude reference="hLs-lS-NxY"/>
+                                <exclude reference="VE1-fR-d2I"/>
+                                <exclude reference="9V9-S4-joQ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -104,6 +181,8 @@
                                 <include reference="YHk-ta-bEp"/>
                                 <include reference="XUN-dO-Az0"/>
                                 <include reference="cim-Sh-e4u"/>
+                                <include reference="Wac-NH-3eh"/>
+                                <include reference="9dW-6B-meu"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="5GJ-eX-EFK"/>
@@ -114,11 +193,24 @@
                                 <include reference="zbr-9H-Rbe"/>
                                 <include reference="1kb-W9-bxX"/>
                                 <include reference="gXL-OG-6zW"/>
+                                <exclude reference="3bD-Vw-abb"/>
                                 <include reference="XwO-ic-V8x"/>
                                 <include reference="aFK-8B-DZg"/>
+                                <exclude reference="yLr-EP-hjQ"/>
+                                <include reference="3wn-EN-Se0"/>
+                                <include reference="Rgu-Yq-3ra"/>
+                                <include reference="hLs-lS-NxY"/>
+                                <include reference="VE1-fR-d2I"/>
+                                <exclude reference="9V9-S4-joQ"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="pageLabel" destination="oI8-y4-uOV" id="aVP-xk-ybC"/>
+                        <outlet property="resultLabel" destination="cim-Sh-e4u" id="Jbz-Vf-G4Z"/>
+                        <outlet property="socketLabel" destination="XUN-dO-Az0" id="sSk-eO-5bC"/>
+                        <outlet property="textView" destination="a3Q-uk-SBU" id="f7Z-Oj-vUw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

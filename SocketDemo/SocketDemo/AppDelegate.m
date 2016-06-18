@@ -25,6 +25,8 @@
     ssvc.socketAddress = SocketAddress;
     ssvc.socketPort = SocketPort;
     
+    self.window.rootViewController = ssvc;
+    
     return YES;
 }
 

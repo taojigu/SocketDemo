@@ -40,8 +40,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    UISwipeGestureRecognizer*recg = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(textviewSwiped:)];
+    recg.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    [self.textView addGestureRecognizer:recg];
+    
+    recg = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(textviewSwiped:)];
+    recg.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [self.textView addGestureRecognizer:recg];
+    
+    self.resultLabel.text = @"Not connected";
+    
+    
     [self refreshUIViews];
+    [self updateTextPage];
     [self createSocket];
+   
 
 }
 
@@ -61,6 +76,46 @@
     [self.socket writeData:data withTimeout:5 tag:-1];
 }
 
+
+-(IBAction)connectButtonClicked:(id)sender
+{
+    NSError* error = nil;
+    [self.socket connectToHost:self.socketAddress onPort:self.socketPort error:&error];
+    if (error!=nil)
+    {
+        self.resultLabel.text = @"Connect failed";
+    }
+    
+}
+
+-(IBAction)disconnectButtonClicked:(id)sender
+{
+    
+    [self.socket disconnect];
+    
+    self.resultLabel.text = @"Disconnected";
+}
+
+-(void)textviewSwiped:(UISwipeGestureRecognizer*)recognizer
+{
+    if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft)
+    {
+        self.pageIndex --;
+    }
+    
+    if (recognizer.direction == UISwipeGestureRecognizerDirectionRight)
+    {
+        self.pageIndex++;
+    }
+    
+    [self updateTextPage];
+}
+
+-(void)updateTextPage
+{
+    self.textView.text = [NSString stringWithFormat:@"Text page at %li",self.pageIndex];
+    self.pageLabel.text = [NSString stringWithFormat:@"当前是第%li页，可以通过左右滑动翻页",self.pageIndex];
+}
 
 -(void)createSocket
 {
